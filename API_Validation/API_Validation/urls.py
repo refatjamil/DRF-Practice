@@ -1,4 +1,4 @@
-"""crud_project URL Configuration
+"""API_Validation URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -18,5 +18,5 @@ from django.urls import path
 from api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('stu/', views.StudentAPI.as_view(), name='stu'),
+    path('stu/', views.StudentAPI.as_view(),),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Student
+from .models import StudentModel
 from .serializers import StudentSerializer
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -23,13 +23,13 @@ class StudentAPI(View):
             id = python_data.get('id', None)
             if id is not None:
             #----------Serialization--------------#
-                student_data = Student.objects.get(id=id)
+                student_data = StudentModel.objects.get(id=id)
                 serializer = StudentSerializer(student_data)
                 json_data = JSONRenderer().render(serializer.data)
                 return HttpResponse(json_data, content_type='application/json')
             else:
             #----------Serialization--------------#
-                student_data = Student.objects.all()
+                student_data = StudentModel.objects.all()
                 serializer = StudentSerializer(student_data, many=True)
                 json_data = JSONRenderer().render(serializer.data)
                 return HttpResponse(json_data, content_type='application/json')
@@ -46,6 +46,9 @@ class StudentAPI(View):
                 res = {'msg':'Data Created'}
                 jason_data = JSONRenderer().render(res)
                 return HttpResponse(jason_data, content_type='application/json')
+            
+            jason_data = JSONRenderer().render(serializer.errors)
+            return HttpResponse(jason_data, content_type='application/json')
 
     def put(self, request, *args, **kwargs):
         if request.method == 'PUT':
@@ -53,7 +56,7 @@ class StudentAPI(View):
             stream = io.BytesIO(json)
             python_data = JSONParser().parse(stream)
             id = python_data.get('id')
-            stu = Student.objects.get(id=id)
+            stu = StudentModel.objects.get(id=id)
             serializer = StudentSerializer(stu, data=python_data, partial=True)
             if serializer.is_valid():
                 serializer.save()
@@ -68,7 +71,7 @@ class StudentAPI(View):
             stream = io.BytesIO(jsson_data)
             python_data = JSONParser().parse(stream)
             id = python_data.get('id')
-            student_data = Student.objects.get(id=id)
+            student_data = StudentModel.objects.get(id=id)
             student_data.delete()
             meg = {'meg':'Item Deleted'}
             json_data = JSONRenderer().render(meg)
