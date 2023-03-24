@@ -15,7 +15,6 @@ from django.views import View
 class StudentAPI(View):
 
     def get(self, request, *args, **kwargs):
-        if request.method == 'GET':
             #----------Deserialization-----------#
             json_data = request.body
             stream = io.BytesIO(json_data)
@@ -36,7 +35,6 @@ class StudentAPI(View):
             
             
     def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
             json = request.body
             stream = io.BytesIO(json)
             python_data = JSONParser().parse(stream)
@@ -48,7 +46,6 @@ class StudentAPI(View):
                 return HttpResponse(jason_data, content_type='application/json')
 
     def put(self, request, *args, **kwargs):
-        if request.method == 'PUT':
             json = request.body
             stream = io.BytesIO(json)
             python_data = JSONParser().parse(stream)
@@ -63,7 +60,6 @@ class StudentAPI(View):
 
 
     def delete(self, request, *args, **kwargs):
-        if request.method == 'DELETE':
             jsson_data = request.body
             stream = io.BytesIO(jsson_data)
             python_data = JSONParser().parse(stream)
