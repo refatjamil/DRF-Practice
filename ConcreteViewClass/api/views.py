@@ -38,6 +38,8 @@ class StudentRetrieveDestroy(RetrieveDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer 
 
+
+
 class StudentRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer 

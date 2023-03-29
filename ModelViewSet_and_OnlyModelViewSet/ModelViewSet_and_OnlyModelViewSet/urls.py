@@ -1,4 +1,4 @@
-"""ConcreteViewClass URL Configuration
+"""ModelViewSet_and_OnlyModelViewSet URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,18 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from api import views
+from rest_framework.routers import DefaultRouter
+
+
+StudentModelViewSetrouter = DefaultRouter()
+StudentReadOnlyModelViewSetrouter = DefaultRouter()
+
+StudentModelViewSetrouter.register('studentapi', views.StudentModelViewSet, basename='student')
+StudentReadOnlyModelViewSetrouter.register('studentapi', views.StudentReadOnlyModelViewSet, basename='student')
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', views.StudentList.as_view()),
-    # path('', views.StudentCreate.as_view()),
-    # path('stu/<int:pk>/', views.StudentRetrieve.as_view()),
-    # path('stu/<int:pk>/', views.StudentUpdate.as_view()),
-    # path('stu/<int:pk>/', views.StudentDestroy.as_view()),
-    # path('stu/<int:pk>/', views.StudentListCreate.as_view()),
-    # path('stu/<int:pk>/', views.StudentRetrieveDestroy.as_view()),
-    path('stu/<int:pk>/', views.StudentRetrieveUpdateDestroy.as_view()),
-
+    path('StudentModelViewSet/', include(StudentModelViewSetrouter.urls)),
+    path('StudentReadOnlyModelViewSet/', include(StudentReadOnlyModelViewSetrouter.urls)),
 
 ]
+
