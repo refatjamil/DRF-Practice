@@ -1,4 +1,4 @@
-"""ViewSet URL Configuration
+"""Authentication _and_Permission_in_Function_Based_View URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,17 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from api import views
-from rest_framework.routers import DefaultRouter
-
-
-router = DefaultRouter()
-
-router.register('studentapi', views.StudentViewSet, basename='student')
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('stu/', views.student_api),
+    path('stu/<int:pk>/', views.student_api),
 ]

@@ -1,4 +1,4 @@
-"""ViewSet URL Configuration
+"""CustomPermission URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -18,13 +18,12 @@ from django.urls import path, include
 from api import views
 from rest_framework.routers import DefaultRouter
 
-
-router = DefaultRouter()
-
-router.register('studentapi', views.StudentViewSet, basename='student')
-
+routers = DefaultRouter()
+routers.register('stuapi', views.StudentModelViewSet, basename='stuapi')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('', include(routers.urls)),
+    path('auth/', include('rest_framework.urls', namespace='rest_framework'))
+
 ]

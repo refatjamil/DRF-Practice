@@ -1,4 +1,4 @@
-"""ViewSet URL Configuration
+"""ModelViewSet_and_OnlyModelViewSet URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -19,12 +19,14 @@ from api import views
 from rest_framework.routers import DefaultRouter
 
 
-router = DefaultRouter()
+StudentModelViewSetrouter = DefaultRouter()
 
-router.register('studentapi', views.StudentViewSet, basename='student')
+StudentModelViewSetrouter.register('studentapi', views.StudentModelViewSet, basename='student')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('StudentModelViewSet/', include(StudentModelViewSetrouter.urls)),
+
 ]
+
