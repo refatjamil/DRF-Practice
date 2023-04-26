@@ -17,7 +17,7 @@ class StudentCreateModelMixin(GenericAPIView, CreateModelMixin):
     serializer_class = StudentSerializer
     
     def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)    
+        return self.create(request, *args, **kwargs)
     
 class StudentRetrieveModelMixin(GenericAPIView, RetrieveModelMixin):
     queryset = Student.objects.all()
